@@ -1,8 +1,7 @@
 <template>
-    {{ title }}
 </template>
-
 <script setup lang="ts">
-const title = ref()
-
+definePageMeta({
+  middleware: 'redirect'
+})
 </script>

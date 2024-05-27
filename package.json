@@ -18,10 +18,12 @@
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.13.1",
+    "@nuxt/typescript-build": "^3.0.2",
     "@types/node": "^20.12.12",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^14.11.0",
+    "sass": "^1.77.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   }
