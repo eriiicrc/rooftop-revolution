@@ -1,7 +1,7 @@
 
 export const useClient = () => {
 
-    const error = ref(false)
+    const error: Ref<boolean> = ref(false)
 
     const store = useMainStore()
 
