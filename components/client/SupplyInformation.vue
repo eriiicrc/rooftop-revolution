@@ -1,19 +1,19 @@
 <template>
      <CardWithTitle title="Supply Information">
         <div class="supply-information">
-            <div class="supply-information__item">
+            <div v-if="$props.tariff" class="supply-information__item">
                 <span class="supply-information__item__title">Tariff:</span>
                 <span>{{ $props.tariff }}</span>
             </div>
-            <div class="supply-information__item">
+            <div v-if="$props.invoicedAmount" class="supply-information__item">
                 <span class="supply-information__item__title">Invoiced amount:</span>
                 <span>{{ $props.invoicedAmount }}€</span>      
             </div>
-            <div class="supply-information__item">
+            <div v-if="$props.p1" class="supply-information__item">
                 <span class="supply-information__item__title">Power 1:</span>
                 <span>{{ $props.p1 }}W</span>
             </div>
-            <div class="supply-information__item">
+            <div v-if="$props.p2" class="supply-information__item">
                 <span class="supply-information__item__title">Power 2:</span>
                 <span>{{ $props.p2 }}W</span>
             </div>
@@ -39,10 +39,10 @@ export default defineComponent({
             type: String
         },
         invoicedAmount: {
-            type: String
+            type: Number
         },
         p1: {
-            type: String
+            type: Number
         },
         p2: {
             type: String
@@ -57,13 +57,24 @@ export default defineComponent({
 <style lang="scss" scoped>
 .supply-information {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     font-size: 14px;
+
+    @media(min-width: 476px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     &__item {
         display: flex;
         gap: 8px;
         flex: 1 1 50%;
         margin-bottom: 20px;
+        justify-content: space-between;
+        
+        @media(min-width: 476px) {
+            justify-content: flex-start;
+        }
 
         &__title {
             display: flex;

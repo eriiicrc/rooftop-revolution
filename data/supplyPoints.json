@@ -33,7 +33,6 @@
     "tariff": "One price",
     "invoiced_amount": "68.00",
     "power": {
-      "p1": "4200",
       "p2": "4200"
     },
     "neighbors": []

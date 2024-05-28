@@ -23,8 +23,8 @@ export default defineComponent({
     flex-direction: column;
     gap: 24px;
     max-width: 350px;
-    min-height: fit-content;
-    max-height: 170px;
+    min-height: 125px;
+    max-height: fit-content;
     background-color: #FFFF;
     padding: 32px;
     border-radius: 5px;

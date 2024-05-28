@@ -1,7 +1,7 @@
 <template>
     <div class="client-header">
-        <img @click="navigateTo('/')" class="client-header__brand" src="../../assets/icons/holaluz.svg" alt="holaluz" />
-        <img @click="navigateTo('/search')" class="client-header__logout" src="../../assets/icons/logout.svg" alt="logout" />
+        <img @click="navigateTo('/')" class="client-header__brand" src="../../assets/icons/holaluz.svg"/>
+        <img @click="navigateTo('/search')" class="client-header__logout" src="../../assets/icons/logout.svg"/>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="client-search__modal">
-        <img class="client-search__logo" src="../../assets/icons/holaluz.svg" alt="holaluz" />
+        <img class="client-search__logo" src="../../assets/icons/holaluz.svg"/>
         <span class="client-search__title">Rooftop revolution</span>
         <span class="client-search__description">Enter your CUPS number to find out if you can be part of our Rooftop revolution</span>
         <div class="client-search__form">

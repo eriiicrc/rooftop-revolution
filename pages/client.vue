@@ -4,6 +4,8 @@
         <ClientInformation 
             :client-info="store.clientInfo"
             :supply-info="store.supplyInfo"
+            :client-allowed="isRevolutionRooftopAllowed"
+            :discount="discount"
         />
     </div>
 </template>
@@ -12,16 +14,21 @@
 import ClientHeader from '../components/client/ClientHeader.vue'
 import ClientInformation from '../components/client/ClientInformation.vue'
 
-const { clientExists, useSearchSupplyInformation } = useClient()
+const { clientExists, useSearchSupplyInformation, useRevolutionRooftop, isRevolutionRooftopAllowed, discount } = useClient()
 const store = useMainStore()
+
 onMounted(async () => {
-        await useSearchSupplyInformation()
+    if (clientExists()) {
+        await useSearchSupplyInformation(store.clientInfo.cups)
+        useRevolutionRooftop()
+    } else {
+        navigateTo('/search')
+    }
 })
 </script>
 
 <style lang="scss" scoped>
 .client-page {
-    background: #F7F6F1;
-    height: 100vh;
+    padding-bottom: 20px;
 }
 </style>

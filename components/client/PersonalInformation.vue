@@ -1,20 +1,20 @@
 <template>
     <CardWithTitle :title="$props.title">
         <div class="personal-information">
-            <div class="personal-information__item">
-                <img src="../../assets/icons/address.svg" alt="holaluz" />
+            <div v-if="$props.address" class="personal-information__item">
+                <img src="../../assets/icons/address.svg"/>
                 <span>{{ $props.address }}</span>
             </div>
             <div class="personal-information__item">
-                <img  src="../../assets/icons/pen.svg" alt="holaluz" />
+                <img  src="../../assets/icons/pen.svg"/>
                 <span>{{ $props.cups }}</span>
             </div>
-            <div class="personal-information__item">
-                <img src="../../assets/icons/role.svg" alt="holaluz" />
+            <div v-if="$props.role" class="personal-information__item">
+                <img src="../../assets/icons/role.svg"/>
                 <span>{{ $props.role }}</span>
             </div>
-            <div class="personal-information__item">
-                <img src="../../assets/icons/building.svg" alt="holaluz" />
+            <div v-if="$props.buildingType" class="personal-information__item">
+                <img src="../../assets/icons/building.svg"/>
                 <span>{{ $props.buildingType }}</span>
             </div>
         </div>
@@ -35,20 +35,17 @@ export default defineComponent({
             required: true
         },
         address: {
-            type: String,
-            required: true
+            type: String
         },
         cups: {
             type: String,
             required: true
         },
         role: {
-            type: String,
-            required: true
+            type: String
         },
         buildingType: {
-            type: String,
-            required: true
+            type: String
         }
     }
 })
