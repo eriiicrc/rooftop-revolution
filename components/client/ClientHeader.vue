@@ -1,24 +1,14 @@
 <template>
     <div class="client-header">
-        <img src="../../assets/icons/holaluz.svg" alt="holaluz" />
-        <img @click="navigateToSearchPage" class="client-header__logout" src="../../assets/icons/logout.svg" alt="logout" />
+        <img @click="navigateTo('/')" class="client-header__brand" src="../../assets/icons/holaluz.svg" alt="holaluz" />
+        <img @click="navigateTo('/search')" class="client-header__logout" src="../../assets/icons/logout.svg" alt="logout" />
     </div>
 </template>
 
 <script lang="ts">
 export default defineComponent({
     emits: ['navigateToSearchPage'],
-    name: 'ClientHeader',
-    setup(props: any, { emit }: any) {
-
-        const navigateToSearchPage = () => {
-            navigateTo('/search')
-        }
-
-        return {
-            navigateToSearchPage
-        }
-    }
+    name: 'ClientHeader'
 })
 </script>
 
@@ -31,6 +21,10 @@ export default defineComponent({
     width: 100%;
     height: 70px;
     background-color: #FFFF;
+
+    &__brand {
+        cursor: pointer;
+    }
     
     &__logout {
         width: 30px;

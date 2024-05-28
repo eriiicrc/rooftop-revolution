@@ -7,7 +7,7 @@
             <input v-model="cups" @keydown.enter="searchClient" @input="cleanError" class="client-search__input" />
             <span v-if="$props.showError" class="client-search__error">Client not found, please try again</span>
         </div>
-        <button @click="searchClient" class="client-search__search-button">Search</button>
+        <button @click="searchClient" class="client-search__search-cta">Search</button>
     </div>
 </template>
 
@@ -90,8 +90,7 @@ export default defineComponent({
         font-weight: 100;
     }
 
-    &__search-button {
-        text-transform: uppercase;
+    &__search-cta {
         padding: 8px 12px;
         border-radius: 16px;
         border: none;

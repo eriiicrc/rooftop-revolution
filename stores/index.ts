@@ -4,8 +4,9 @@ import type { Client, SupplyPoint } from '@/types'
 export const useMainStore = defineStore('main', {
   state: () => ({
     clients: [] as Client[],
-    currentClient: undefined as Client | undefined,
     supplyPoints: [] as SupplyPoint[],
+    clientInfo: {} as Client,
+    supplyInfo: {} as SupplyPoint,
   }),
   actions: {
     async fetchClients() {
