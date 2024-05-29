@@ -76,6 +76,10 @@ export default defineComponent({
             justify-content: flex-start;
         }
 
+        &:last-child {
+            margin-bottom: 0;
+        }
+
         &__title {
             display: flex;
             font-weight: 100;

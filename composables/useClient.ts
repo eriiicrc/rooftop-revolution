@@ -1,4 +1,7 @@
 import { BUILDING_TYPES, DISCOUNT, type Discount, type SupplyPoint } from "~/types"
+import { ref } from 'vue'
+import { useMainStore } from '@/stores'
+import { useRoute } from 'vue-router'
 
 export const useClient = () => {
 
@@ -35,7 +38,7 @@ export const useClient = () => {
         }
     }    
 
-    const useSearchSupplyInformation = async () => {
+    const useSearchSupplyInformation = () => {
         store.setSupplyInfoByCups(store.clientInfo.cups)
     }
 
@@ -73,9 +76,8 @@ export const useClient = () => {
         }
     }
 
-    const useSearchSupplyPointsAndDiscount = async () => {
-        await useFetchSupplyPoints()
-        await useSearchSupplyInformation()
+    const useSearchSupplyInfoAndDiscount = () => {
+        useSearchSupplyInformation()
         if (store.hasClientSupplyPointInfo()) {
             useRevolutionRooftop()
         }
@@ -87,7 +89,8 @@ export const useClient = () => {
 
     const useInitClientPage = async () => {
         if (useHasClientInfo()) {
-            await useSearchSupplyPointsAndDiscount()
+            await useFetchSupplyPoints()
+            useSearchSupplyInfoAndDiscount()
             return
         }
     
@@ -103,8 +106,8 @@ export const useClient = () => {
             useNavigateToSearch()
             return
         }
-
-        await useSearchSupplyPointsAndDiscount()
+        await useFetchSupplyPoints()
+        useSearchSupplyInfoAndDiscount()
     }
 
     return {

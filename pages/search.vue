@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import SearchClient from '../components/search/SearchClient.vue'
+import SearchClient from '@/components/search/SearchClient.vue'
 
 const { useFetchClients, useSearchClient, useNavigateToClient, useCleanError, error } = useClient()
 

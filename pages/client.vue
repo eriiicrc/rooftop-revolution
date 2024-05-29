@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import ClientHeader from '../components/client/ClientHeader.vue'
-import ClientInformation from '../components/client/ClientInformation.vue'
+import ClientHeader from '@/components/client/ClientHeader.vue'
+import ClientInformation from '@/components/client/ClientInformation.vue'
 
 const { useInitClientPage, isRevolutionRooftopAllowed, discount } = useClient()
 const store = useMainStore()
