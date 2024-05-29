@@ -1,7 +1,7 @@
 <template>
     <div class="search-page">
         <SearchClient
-            :show-error="error"
+            :error="error"
             @clean-error="cleanError"
             @search-client="searchClient"
         />
@@ -11,11 +11,11 @@
 <script setup lang="ts">
 import SearchClient from '../components/search/SearchClient.vue'
 
-const { useSearchClient, redirectToClient, error } = useClient()
+const { useSearchClient, useRedirectToClient, error } = useClient()
 
 const searchClient = async (cups: string) => {
     await useSearchClient(cups)
-    redirectToClient()
+    useRedirectToClient()
 }
 
 const cleanError = () => error.value = false

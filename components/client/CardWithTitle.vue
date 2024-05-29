@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <span class="card__name">{{ $props.title }}</span>
+        <span class="card__name">{{ title }}</span>
         <slot></slot>
     </div>
 </template>

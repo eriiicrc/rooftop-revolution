@@ -1,5 +1,5 @@
 <template>
-    <div v-if="clientExists()" class="client-page">
+    <div v-if="store.hasClientInfo()" class="client-page">
         <ClientHeader />
         <ClientInformation 
             :client-info="store.clientInfo"
@@ -14,13 +14,22 @@
 import ClientHeader from '../components/client/ClientHeader.vue'
 import ClientInformation from '../components/client/ClientInformation.vue'
 
-const { clientExists, useSearchSupplyInformation, useRevolutionRooftop, isRevolutionRooftopAllowed, discount } = useClient()
+const { useSearchSupplyInformation, useRevolutionRooftop, useSearchClient, isRevolutionRooftopAllowed, discount } = useClient()
 const store = useMainStore()
 
+const { query } = useRoute()
+
+const loadClientPage = async () => {
+    await useSearchSupplyInformation()
+    useRevolutionRooftop()
+}
+
 onMounted(async () => {
-    if (clientExists()) {
-        await useSearchSupplyInformation(store.clientInfo.cups)
-        useRevolutionRooftop()
+    if (store.hasClientInfo()) {
+        await loadClientPage()
+    } else if (query.cups && typeof query.cups === 'string') {
+        await useSearchClient(query.cups)
+        await loadClientPage()
     } else {
         navigateTo('/search')
     }

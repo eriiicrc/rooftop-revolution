@@ -1,21 +1,21 @@
 <template>
-    <CardWithTitle :title="$props.title">
+    <CardWithTitle :title="title">
         <div class="personal-information">
-            <div v-if="$props.address" class="personal-information__item">
+            <div v-if="address" class="personal-information__item">
                 <img src="../../assets/icons/address.svg"/>
-                <span>{{ $props.address }}</span>
+                <span>{{ address }}</span>
             </div>
             <div class="personal-information__item">
                 <img  src="../../assets/icons/pen.svg"/>
-                <span>{{ $props.cups }}</span>
+                <span>{{ cups }}</span>
             </div>
-            <div v-if="$props.role" class="personal-information__item">
+            <div v-if="role" class="personal-information__item">
                 <img src="../../assets/icons/role.svg"/>
-                <span>{{ $props.role }}</span>
+                <span>{{ role }}</span>
             </div>
-            <div v-if="$props.buildingType" class="personal-information__item">
+            <div v-if="buildingType" class="personal-information__item">
                 <img src="../../assets/icons/building.svg"/>
-                <span>{{ $props.buildingType }}</span>
+                <span>{{ buildingType }}</span>
             </div>
         </div>
     </CardWithTitle>   

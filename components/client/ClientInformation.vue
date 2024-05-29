@@ -1,21 +1,21 @@
 <template>
-    <div v-if="$props.supplyInfo && $props.clientInfo" class="client-info">
-        <span class="client-info__title">Hi <span class="client-info__name">{{ $props.clientInfo.full_name }}</span>,</span>
+    <div v-if="supplyInfo && clientInfo" class="client-info">
+        <span class="client-info__title">Hi <span class="client-info__name">{{ clientInfo.full_name }}</span>,</span>
         <div class="client-info__cards">
             <PersonalInformation 
-                :title="$props.clientInfo.full_name"
-                :address="$props.clientInfo.address"
-                :cups="$props.clientInfo.cups"
-                :role="$props.clientInfo.role"
-                :building-type="$props.clientInfo.building_type"
+                :title="clientInfo.full_name"
+                :address="clientInfo.address"
+                :cups="clientInfo.cups"
+                :role="clientInfo.role"
+                :building-type="clientInfo.building_type"
             />
             <SupplyInformation 
-                :tariff="$props.supplyInfo.tariff"
-                :invoiced-amount="$props.supplyInfo.invoiced_amount"
-                :role="$props.supplyInfo.role"
-                :p1="$props.supplyInfo.power?.p1"
-                :p2="$props.supplyInfo.power?.p2"
-                :neighbors="$props.supplyInfo.neighbors"
+                :tariff="supplyInfo.tariff"
+                :invoiced-amount="supplyInfo.invoiced_amount"
+                :role="supplyInfo.role"
+                :p1="supplyInfo.power?.p1"
+                :p2="supplyInfo.power?.p2"
+                :neighbors="supplyInfo.neighbors"
             />
         </div>
         <div v-if="clientAllowed" class="client-info__allowed">
@@ -26,7 +26,7 @@
             <img src="../../assets/icons/not-allowed.svg"/>
             <span>You are not allowed to get enrolled with the <span class="client-info__allowed__title">Rooftop revolution</span></span>
         </div>
-        <div v-if="$props.discount.type" class="client-info__discount-type">
+        <div v-if="discount.type" class="client-info__discount-type">
             <div class="client-info__discount-type__title">{{ discount.type }}</div>
             <span class="client-info__discount-type__discount">{{ discount.discount }}</span>
         </div>

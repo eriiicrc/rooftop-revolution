@@ -31,6 +31,9 @@ export const useMainStore = defineStore('main', {
     },
     findNeighborByCups(cups: string): SupplyPoint {
       return this.supplyPoints.find(client => client.cups === cups) || {} as SupplyPoint
+    },
+    hasClientInfo(): boolean {
+      return this.clientInfo.cups !== undefined
     }
   },
 })

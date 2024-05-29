@@ -10,10 +10,8 @@ export const useClient = () => {
 
     const store = useMainStore()
 
-    const clientExists = () => store.clientInfo.cups !== undefined
-
-    const redirectToClient = () => {
-        if (clientExists()) {
+    const useRedirectToClient = () => {
+        if (store.hasClientInfo()) {
             navigateTo({path: '/client', query: { cups: store.clientInfo.cups }})
         } else {
             error.value = true
@@ -33,9 +31,9 @@ export const useClient = () => {
         store.findClientByCups(cups)
     }
 
-    const useSearchSupplyInformation = async (cups: string) => {
-            await useFetchSupplyInformation()
-            store.findSupplyInfoByCups(cups)
+    const useSearchSupplyInformation = async () => {
+        await useFetchSupplyInformation()
+        store.findSupplyInfoByCups(store.clientInfo.cups)
     }
 
     const useRevolutionRooftop = () => {
@@ -45,19 +43,27 @@ export const useClient = () => {
         }
     }
 
-    const useGetDiscountType = () => {
-        let invoicedAmount: number = 0
-        let isPowerLessThanNeighbors: boolean = true
-        store.supplyInfo.neighbors.forEach(neighbor => {
+    const useCalculateInvoicedAmount = (): number => {
+        return store.supplyInfo.neighbors.reduce((total, neighbor) => {
             const neighborInfo: SupplyPoint = store.findNeighborByCups(neighbor)
-            invoicedAmount += neighborInfo.invoiced_amount
-            if (isPowerLessThanNeighbors) {
-                isPowerLessThanNeighbors = neighborInfo.power.p1 < store.supplyInfo.power.p1 && neighborInfo.power.p2 < store.supplyInfo.power.p2
-            }
+            return total + neighborInfo.invoiced_amount
+        }, 0)
+    }
+    
+    const useIsPowerNeighborsLowerThanClient = (): boolean => {
+        return store.supplyInfo.neighbors.every(neighbor => {
+            const neighborInfo: SupplyPoint = store.findNeighborByCups(neighbor)
+            return neighborInfo.power.p1 < store.supplyInfo.power.p1 && neighborInfo.power.p2 < store.supplyInfo.power.p2
         })
+    }
+    
+    const useGetDiscountType = () => {
+        const invoicedAmount: number = useCalculateInvoicedAmount()
+        const isPowerNeighborsLowerThanClient: boolean = useIsPowerNeighborsLowerThanClient()
+    
         if (invoicedAmount > 100) {
             discount.value = DISCOUNT.special
-        } else if (!isPowerLessThanNeighbors) {
+        } else if (isPowerNeighborsLowerThanClient) {
             discount.value = DISCOUNT.basic
         } else {
             discount.value = DISCOUNT.standard
@@ -68,8 +74,7 @@ export const useClient = () => {
         useSearchClient: useSearchClient,
         error: error,
         useSearchSupplyInformation: useSearchSupplyInformation,
-        clientExists: clientExists,
-        redirectToClient: redirectToClient,
+        useRedirectToClient: useRedirectToClient,
         useRevolutionRooftop: useRevolutionRooftop,
         isRevolutionRooftopAllowed: isRevolutionRooftopAllowed,
         discount: discount

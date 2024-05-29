@@ -1,23 +1,23 @@
 <template>
      <CardWithTitle title="Supply Information">
         <div class="supply-information">
-            <div v-if="$props.tariff" class="supply-information__item">
+            <div v-if="tariff" class="supply-information__item">
                 <span class="supply-information__item__title">Tariff:</span>
-                <span>{{ $props.tariff }}</span>
+                <span>{{ tariff }}</span>
             </div>
-            <div v-if="$props.invoicedAmount" class="supply-information__item">
+            <div v-if="invoicedAmount" class="supply-information__item">
                 <span class="supply-information__item__title">Invoiced amount:</span>
-                <span>{{ $props.invoicedAmount }}€</span>      
+                <span>{{ invoicedAmount }}€</span>      
             </div>
-            <div v-if="$props.p1" class="supply-information__item">
+            <div v-if="p1" class="supply-information__item">
                 <span class="supply-information__item__title">Power 1:</span>
-                <span>{{ $props.p1 }}W</span>
+                <span>{{ p1 }}W</span>
             </div>
-            <div v-if="$props.p2" class="supply-information__item">
+            <div v-if="p2" class="supply-information__item">
                 <span class="supply-information__item__title">Power 2:</span>
-                <span>{{ $props.p2 }}W</span>
+                <span>{{ p2 }}W</span>
             </div>
-            <div v-for="(neighbor, index) in $props.neighbors" class="supply-information__item" :key="index">
+            <div v-for="(neighbor, index) in neighbors" class="supply-information__item" :key="index">
                 <span class="supply-information__item__title">Neighbor {{ index + 1 }}:</span>
                 <span>{{ neighbor }}</span>
             </div>
