@@ -72,7 +72,9 @@ export default defineComponent({
     }
 
     &__form {
+        position: relative;
         display: flex;
+        align-items: center;
         flex-direction: column;
         gap: 8px;
         width: 80%;
@@ -80,12 +82,15 @@ export default defineComponent({
 
     &__input {
         padding: 4px 8px;
+        width: 80%;
         outline: none;
         border-radius: 8px;
         border: 1px solid #37424D;
     }
 
     &__error {
+        position: absolute;
+        top: 30px;
         color: #DA0000;
         font-size: 10px;
         font-weight: 100;

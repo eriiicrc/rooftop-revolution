@@ -45,7 +45,7 @@ export default defineComponent({
             type: Number
         },
         p2: {
-            type: String
+            type: Number
         },
         neighbors: {
             type: Array as any

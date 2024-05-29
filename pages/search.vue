@@ -11,11 +11,11 @@
 <script setup lang="ts">
 import SearchClient from '../components/search/SearchClient.vue'
 
-const { useFetchClients, useSearchClient, useRedirectToClient, useCleanError, error } = useClient()
+const { useFetchClients, useSearchClient, useNavigateToClient, useCleanError, error } = useClient()
 
 const searchClient = async (cups: string) => {
     await useSearchClient(cups)
-    useRedirectToClient()
+    if(!error.value) useNavigateToClient()
 }
 
 onMounted(async () => {

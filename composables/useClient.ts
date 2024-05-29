@@ -10,12 +10,12 @@ export const useClient = () => {
 
     const store = useMainStore()
 
-    const useRedirectToClient = () => {
-        if (store.hasClientInfo()) {
-            navigateTo({path: '/client', query: { cups: store.clientInfo.cups }})
-        } else {
-            error.value = true
-        }
+    const { query } = useRoute()
+
+    const useHasClientInfo = () => store.hasClientInfo()
+
+    const useNavigateToClient = () => {
+        navigateTo({ path: '/client', query: { cups: store.clientInfo.cups }})
     }
 
     const useCleanError = () => error.value = false
@@ -29,11 +29,14 @@ export const useClient = () => {
     }
 
     const useSearchClient = (cups: string) => {
-        store.getClientByCups(cups)
+        store.setClientByCups(cups)
+        if (!useHasClientInfo()) {
+            error.value = true
+        }
     }    
 
     const useSearchSupplyInformation = async () => {
-        store.getSupplyInfoByCups(store.clientInfo.cups)
+        store.setSupplyInfoByCups(store.clientInfo.cups)
     }
 
     const useRevolutionRooftop = () => {
@@ -70,17 +73,45 @@ export const useClient = () => {
         }
     }
 
-    const useInitClientPage = async () => {
+    const useSearchSupplyPointsAndDiscount = async () => {
         await useFetchSupplyPoints()
         await useSearchSupplyInformation()
-        useRevolutionRooftop()
+        if (store.hasClientSupplyPointInfo()) {
+            useRevolutionRooftop()
+        }
+    }
+
+    const useNavigateToSearch = () => {
+        navigateTo('/search')
+    }
+
+    const useInitClientPage = async () => {
+        if (useHasClientInfo()) {
+            await useSearchSupplyPointsAndDiscount()
+            return
+        }
+    
+        if (!query.cups) {
+            useNavigateToSearch()
+            return
+        }
+    
+        await useFetchClients()
+        useSearchClient(query.cups.toString())
+    
+        if (!useHasClientInfo()) {
+            useNavigateToSearch()
+            return
+        }
+
+        await useSearchSupplyPointsAndDiscount()
     }
 
     return {
         error: error,
         isRevolutionRooftopAllowed: isRevolutionRooftopAllowed,
         discount: discount,
-        useRedirectToClient: useRedirectToClient,
+        useNavigateToClient: useNavigateToClient,
         useCleanError: useCleanError,
         useFetchClients: useFetchClients,
         useSearchClient: useSearchClient,

@@ -6,6 +6,7 @@
             :supply-info="store.supplyInfo"
             :client-allowed="isRevolutionRooftopAllowed"
             :discount="discount"
+            :has-supply-info="store.hasClientSupplyPointInfo()"
         />
     </div>
 </template>
@@ -14,21 +15,11 @@
 import ClientHeader from '../components/client/ClientHeader.vue'
 import ClientInformation from '../components/client/ClientInformation.vue'
 
-const { useInitClientPage, useFetchClients, useSearchClient, isRevolutionRooftopAllowed, discount } = useClient()
+const { useInitClientPage, isRevolutionRooftopAllowed, discount } = useClient()
 const store = useMainStore()
 
-const { query } = useRoute()
-
 onMounted(async () => {
-    if (store.hasClientInfo()) {
-        await useInitClientPage()
-    } else if (query.cups) {
-        await useFetchClients()
-        useSearchClient(query.cups.toString())
-        await useInitClientPage()
-    } else {
-        navigateTo('/search')
-    }
+    await useInitClientPage()
 })
 </script>
 

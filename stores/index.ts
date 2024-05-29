@@ -10,23 +10,31 @@ export const useMainStore = defineStore('main', {
   }),
   actions: {
     async fetchClients() {
-      this.clients = await $fetch<Client[]>('/api/clients')
+      try {
+        this.clients = await $fetch<Client[]>('/api/clients')
+      } catch (error) {
+        console.error('Failed to fetch clients: ', error)
+      }
     },
     async fetchSupplyPoints() {
-      const supplyPointsResponse= await $fetch<SupplyPointResponse[]>('/api/supplyPoints')
-      this.supplyPoints = supplyPointsResponse.map(supplyPoint => ({
-        ...supplyPoint,
-        invoiced_amount: parseFloat(supplyPoint.invoiced_amount),
-        power: {
-          p1: parseFloat(supplyPoint.power.p1),
-          p2: parseFloat(supplyPoint.power.p2),
-        },
-      }))
+      try {
+        const supplyPointsResponse= await $fetch<SupplyPointResponse[]>('/api/supplyPoints')
+        this.supplyPoints = supplyPointsResponse.map(supplyPoint => ({
+          ...supplyPoint,
+          invoiced_amount: parseFloat(supplyPoint.invoiced_amount),
+          power: {
+            p1: parseFloat(supplyPoint.power.p1),
+            p2: parseFloat(supplyPoint.power.p2),
+          },
+        }))
+      } catch (error) {
+        console.error('Failed to supply points information: ', error)
+      }
     },
-    getClientByCups(cups: string) {
+    setClientByCups(cups: string) {
       this.clientInfo = this.clients.find(client => client.cups === cups) || {} as Client
     },
-    getSupplyInfoByCups(cups: string) {
+    setSupplyInfoByCups(cups: string) {
       this.supplyInfo = this.supplyPoints.find(supplyPoint => supplyPoint.cups === cups) || {} as SupplyPoint
     },
     getNeighborByCups(cups: string): SupplyPoint {
@@ -34,6 +42,9 @@ export const useMainStore = defineStore('main', {
     },
     hasClientInfo(): boolean {
       return this.clientInfo.cups !== undefined
+    },
+    hasClientSupplyPointInfo(): boolean {
+      return this.supplyInfo.cups !== undefined
     }
   },
 })
