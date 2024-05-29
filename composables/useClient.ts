@@ -1,4 +1,4 @@
-import { BUILDING_TYPES, DISCOUNT, type SupplyPoint } from "~/types"
+import { BUILDING_TYPES, DISCOUNT, type Discount, type SupplyPoint } from "~/types"
 
 export const useClient = () => {
 
@@ -6,7 +6,7 @@ export const useClient = () => {
 
     const isRevolutionRooftopAllowed: Ref<boolean> = ref(false)
 
-    const discount = ref({})
+    const discount: Ref<Discount> = ref({} as Discount)
 
     const store = useMainStore()
 
@@ -18,22 +18,22 @@ export const useClient = () => {
         }
     }
 
+    const useCleanError = () => error.value = false
+
     const useFetchClients = async () => {
         await store.fetchClients()
     }
 
-    const useFetchSupplyInformation = async () => {
+    const useFetchSupplyPoints = async () => {
         await store.fetchSupplyPoints()
     }
 
-    const useSearchClient = async (cups: string) => {
-        await useFetchClients()
-        store.findClientByCups(cups)
-    }
+    const useSearchClient = (cups: string) => {
+        store.getClientByCups(cups)
+    }    
 
     const useSearchSupplyInformation = async () => {
-        await useFetchSupplyInformation()
-        store.findSupplyInfoByCups(store.clientInfo.cups)
+        store.getSupplyInfoByCups(store.clientInfo.cups)
     }
 
     const useRevolutionRooftop = () => {
@@ -45,14 +45,14 @@ export const useClient = () => {
 
     const useCalculateInvoicedAmount = (): number => {
         return store.supplyInfo.neighbors.reduce((total, neighbor) => {
-            const neighborInfo: SupplyPoint = store.findNeighborByCups(neighbor)
+            const neighborInfo: SupplyPoint = store.getNeighborByCups(neighbor)
             return total + neighborInfo.invoiced_amount
         }, 0)
     }
     
     const useIsPowerNeighborsLowerThanClient = (): boolean => {
         return store.supplyInfo.neighbors.every(neighbor => {
-            const neighborInfo: SupplyPoint = store.findNeighborByCups(neighbor)
+            const neighborInfo: SupplyPoint = store.getNeighborByCups(neighbor)
             return neighborInfo.power.p1 < store.supplyInfo.power.p1 && neighborInfo.power.p2 < store.supplyInfo.power.p2
         })
     }
@@ -70,13 +70,20 @@ export const useClient = () => {
         }
     }
 
+    const useInitClientPage = async () => {
+        await useFetchSupplyPoints()
+        await useSearchSupplyInformation()
+        useRevolutionRooftop()
+    }
+
     return {
-        useSearchClient: useSearchClient,
         error: error,
-        useSearchSupplyInformation: useSearchSupplyInformation,
-        useRedirectToClient: useRedirectToClient,
-        useRevolutionRooftop: useRevolutionRooftop,
         isRevolutionRooftopAllowed: isRevolutionRooftopAllowed,
-        discount: discount
+        discount: discount,
+        useRedirectToClient: useRedirectToClient,
+        useCleanError: useCleanError,
+        useFetchClients: useFetchClients,
+        useSearchClient: useSearchClient,
+        useInitClientPage: useInitClientPage
     }
 }

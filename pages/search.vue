@@ -2,7 +2,7 @@
     <div class="search-page">
         <SearchClient
             :error="error"
-            @clean-error="cleanError"
+            @clean-error="useCleanError"
             @search-client="searchClient"
         />
     </div>
@@ -11,14 +11,16 @@
 <script setup lang="ts">
 import SearchClient from '../components/search/SearchClient.vue'
 
-const { useSearchClient, useRedirectToClient, error } = useClient()
+const { useFetchClients, useSearchClient, useRedirectToClient, useCleanError, error } = useClient()
 
 const searchClient = async (cups: string) => {
     await useSearchClient(cups)
     useRedirectToClient()
 }
 
-const cleanError = () => error.value = false
+onMounted(async () => {
+    await useFetchClients()
+})
 </script>
 
 <style lang="scss">

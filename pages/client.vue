@@ -14,22 +14,18 @@
 import ClientHeader from '../components/client/ClientHeader.vue'
 import ClientInformation from '../components/client/ClientInformation.vue'
 
-const { useSearchSupplyInformation, useRevolutionRooftop, useSearchClient, isRevolutionRooftopAllowed, discount } = useClient()
+const { useInitClientPage, useFetchClients, useSearchClient, isRevolutionRooftopAllowed, discount } = useClient()
 const store = useMainStore()
 
 const { query } = useRoute()
 
-const loadClientPage = async () => {
-    await useSearchSupplyInformation()
-    useRevolutionRooftop()
-}
-
 onMounted(async () => {
     if (store.hasClientInfo()) {
-        await loadClientPage()
-    } else if (query.cups && typeof query.cups === 'string') {
-        await useSearchClient(query.cups)
-        await loadClientPage()
+        await useInitClientPage()
+    } else if (query.cups) {
+        await useFetchClients()
+        useSearchClient(query.cups.toString())
+        await useInitClientPage()
     } else {
         navigateTo('/search')
     }

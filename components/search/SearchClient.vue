@@ -5,7 +5,8 @@
         <span class="client-search__description">Enter your CUPS number to find out if you can be part of our Rooftop revolution</span>
         <div class="client-search__form">
             <input v-model="cups" @keydown.enter="searchClient" @input="cleanError" class="client-search__input" />
-            <span v-if="error" class="client-search__error">Client not found, please try again</span>
+            <span v-if="error && cups" class="client-search__error">Client not found, please try again</span>
+            <span v-else-if="error && cups === ''" class="client-search__error">CUPS is required!</span>
         </div>
         <button @click="searchClient" class="client-search__search-cta">Search</button>
     </div>

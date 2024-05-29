@@ -28,6 +28,11 @@ export interface SupplyPointResponse {
   neighbors: string[];
 }
 
+export interface Discount {
+  type: string,
+  discount: string
+}
+
 export const DISCOUNT = {
   standard: { type: 'Standard discount', discount: 'No Discount' },
   basic: { type: 'Basic discount', discount: '5% discount' },

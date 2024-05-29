@@ -23,13 +23,13 @@ export const useMainStore = defineStore('main', {
         },
       }))
     },
-    findClientByCups(cups: string) {
+    getClientByCups(cups: string) {
       this.clientInfo = this.clients.find(client => client.cups === cups) || {} as Client
     },
-    findSupplyInfoByCups(cups: string) {
+    getSupplyInfoByCups(cups: string) {
       this.supplyInfo = this.supplyPoints.find(supplyPoint => supplyPoint.cups === cups) || {} as SupplyPoint
     },
-    findNeighborByCups(cups: string): SupplyPoint {
+    getNeighborByCups(cups: string): SupplyPoint {
       return this.supplyPoints.find(client => client.cups === cups) || {} as SupplyPoint
     },
     hasClientInfo(): boolean {
