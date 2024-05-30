@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-This web application allows users to search for clients using a CUPS (Código Universal de Punto de Suministro) number and redirects them to a Client Page displaying comprehensive personal and supply information.
+This web application allows users to search for clients using a CUPS number and redirects them to a Client Page displaying comprehensive personal and supply information.
 
 - Features
 
