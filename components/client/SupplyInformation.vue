@@ -37,19 +37,24 @@ export default defineComponent({
     },
     props: {
         tariff: {
-            type: String
+            type: String,
+            default: ''
         },
         invoicedAmount: {
-            type: Number
+            type: Number,
+            default: ''
         },
         p1: {
-            type: Number
+            type: Number,
+            default: ''
         },
         p2: {
-            type: Number
+            type: Number,
+            default: ''
         },
         neighbors: {
-            type: Array as any
+            type: Array as any,
+            default: []
         }
     }
 })

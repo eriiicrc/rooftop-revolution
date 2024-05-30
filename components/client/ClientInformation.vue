@@ -40,16 +40,19 @@ export default defineComponent({
     props: {
         clientInfo: {
             type: Object as any,
+            default: {}
         },
         supplyInfo: {
             type: Object as any,
+            default: {}
         },
         clientAllowed: {
             type: Boolean,
             default: false
         },
         discount: {
-            type: Object as any
+            type: Object as any,
+            default: {}
         },
         hasSupplyInfo: {
             type: Boolean,

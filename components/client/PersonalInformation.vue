@@ -36,17 +36,20 @@ export default defineComponent({
             required: true
         },
         address: {
-            type: String
+            type: String,
+            default: ''
         },
         cups: {
             type: String,
             required: true
         },
         role: {
-            type: String
+            type: String,
+            default: ''
         },
         buildingType: {
-            type: String
+            type: String,
+            default: ''
         }
     }
 })

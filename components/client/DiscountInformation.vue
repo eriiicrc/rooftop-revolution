@@ -23,6 +23,7 @@ export default defineComponent({
     props: {
         discount: {
             type: Object as any,
+            default: {}
         },
         clientAllowed: {
             type: Boolean,
