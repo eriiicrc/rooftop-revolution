@@ -7,7 +7,6 @@
 
 <script lang="ts">
 export default defineComponent({
-    emits: ['navigateToSearchPage'],
     name: 'ClientHeader'
 })
 </script>
