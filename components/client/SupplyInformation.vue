@@ -42,15 +42,15 @@ export default defineComponent({
         },
         invoicedAmount: {
             type: Number,
-            default: ''
+            default: 0
         },
         p1: {
             type: Number,
-            default: ''
+            default: 0
         },
         p2: {
             type: Number,
-            default: ''
+            default: 0
         },
         neighbors: {
             type: Array as any,
