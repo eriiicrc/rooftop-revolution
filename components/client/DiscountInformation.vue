@@ -2,20 +2,22 @@
     <div class="discount-info">
         <div v-if="clientAllowed" class="discount-info__allowed">
             <img src="../../assets/icons/allowed.svg"/>
-            <span>You are allowed to get enrolled with the <span class="discount-info__allowed__title">Rooftop revolution</span></span>
+            <span data-testid="allowed-msg">You are allowed to get enrolled with the <span class="discount-info__allowed__title">Rooftop revolution</span></span>
         </div>
         <div v-else class="discount-info__allowed">
             <img src="../../assets/icons/not-allowed.svg"/>
-            <span>You are not allowed to get enrolled with the <span class="discount-info__allowed__title">Rooftop revolution</span></span>
+            <span data-testid="not-allowed-msg">You are not allowed to get enrolled with the <span class="discount-info__allowed__title">Rooftop revolution</span></span>
         </div>
-        <div v-if="discount.type" class="discount-info__discount-type">
-            <div class="discount-info__discount-type__title">{{ discount.type }}</div>
-            <span class="discount-info__discount-type__discount">{{ discount.discount }}</span>
+        <div v-if="clientAllowed" class="discount-info__discount-type" data-testid="discount">
+            <div class="discount-info__discount-type__title" data-testid="discount-type">{{ discount.type }}</div>
+            <span class="discount-info__discount-type__discount" data-testid="discount-value">{{ discount.discount }}</span>
         </div>
     </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
+
 export default defineComponent({
     name: 'DiscountInformation',
     props: {

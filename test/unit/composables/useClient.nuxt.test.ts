@@ -21,7 +21,7 @@ describe('useClient', () => {
         store.supplyPoints = supplyPoints
     })
 
-    it('should set error to true when there client cannot be found', () => {
+    it('should set error to true when a client cannot be found', () => {
         const { error, useSearchClient } = useClient()
         useSearchClient('xxxxxxx')
         expect(error.value).toBe(true)

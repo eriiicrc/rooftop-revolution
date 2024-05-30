@@ -3,21 +3,21 @@
         <div class="supply-information">
             <div v-if="tariff" class="supply-information__item">
                 <span class="supply-information__item__title">Tariff:</span>
-                <span>{{ tariff }}</span>
+                <span data-testid="tariff">{{ tariff }}</span>
             </div>
             <div v-if="invoicedAmount" class="supply-information__item">
                 <span class="supply-information__item__title">Invoiced amount:</span>
-                <span>{{ invoicedAmount }}€</span>      
+                <span data-testid="invoiced-amount">{{ invoicedAmount }}€</span>      
             </div>
             <div v-if="p1" class="supply-information__item">
                 <span class="supply-information__item__title">Power 1:</span>
-                <span>{{ p1 }}W</span>
+                <span data-testid="p1">{{ p1 }}W</span>
             </div>
             <div v-if="p2" class="supply-information__item">
                 <span class="supply-information__item__title">Power 2:</span>
-                <span>{{ p2 }}W</span>
+                <span data-testid="p2">{{ p2 }}W</span>
             </div>
-            <div v-for="(neighbor, index) in neighbors" class="supply-information__item" :key="index">
+            <div v-for="(neighbor, index) in neighbors" class="supply-information__item" :key="index" data-testid="neighbors">
                 <span class="supply-information__item__title">Neighbor {{ index + 1 }}:</span>
                 <span>{{ neighbor }}</span>
             </div>
@@ -27,6 +27,7 @@
 
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import CardWithTitle from './CardWithTitle.vue';
 
 export default defineComponent({

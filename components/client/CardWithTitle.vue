@@ -1,11 +1,12 @@
 <template>
-    <div class="card">
-        <span class="card__name">{{ title }}</span>
+    <div class="card" data-testid="card">
+        <span class="card__name" data-testid="card-title">{{ title }}</span>
         <slot></slot>
     </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 export default defineComponent({
     name: 'CardWithTitle',
     props: {

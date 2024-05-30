@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 const alias = {
   '~': resolve(__dirname, './'),
-  '@': resolve(__dirname, './'),
+  '@': resolve(__dirname, './')
 };
 
 export default defineConfig({
@@ -12,5 +12,7 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     environment: 'happy-dom',
-  },
+    setupFiles: ['./test/setup.ts'],
+    globals: true
+  }
 });

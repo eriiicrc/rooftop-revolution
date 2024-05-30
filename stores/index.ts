@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
-import type { Client, SupplyPoint, SupplyPointResponse } from '@/types'
+import type { Client, SupplyPoint } from '@/types'
+import clients from '@/data/clients.json'
+import supplyPoints from '@/data/supplyPoints.json'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
@@ -11,15 +13,16 @@ export const useMainStore = defineStore('main', {
   actions: {
     async fetchClients() {
       try {
-        this.clients = await $fetch<Client[]>('/api/clients')
+        // this.clients = await $fetch<Client[]>('/api/clients')
+        this.clients = clients
       } catch (error) {
         console.error('Failed to fetch clients: ', error)
       }
     },
     async fetchSupplyPoints() {
       try {
-        const supplyPointsResponse= await $fetch<SupplyPointResponse[]>('/api/supplyPoints')
-        this.supplyPoints = supplyPointsResponse.map(supplyPoint => ({
+        // const supplyPointsResponse = await $fetch<SupplyPointResponse[]>('/api/supplyPoints')
+        this.supplyPoints = supplyPoints.map(supplyPoint => ({
           ...supplyPoint,
           invoiced_amount: parseFloat(supplyPoint.invoiced_amount),
           power: {

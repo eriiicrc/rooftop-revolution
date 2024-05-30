@@ -3,25 +3,26 @@
         <div class="personal-information">
             <div v-if="address" class="personal-information__item">
                 <img src="../../assets/icons/address.svg"/>
-                <span>{{ address }}</span>
+                <span data-testid="address">{{ address }}</span>
             </div>
             <div class="personal-information__item">
                 <img  src="../../assets/icons/pen.svg"/>
-                <span>{{ cups }}</span>
+                <span data-testid="cups">{{ cups }}</span>
             </div>
             <div v-if="role" class="personal-information__item">
                 <img src="../../assets/icons/role.svg"/>
-                <span>{{ role }}</span>
+                <span data-testid="role">{{ role }}</span>
             </div>
             <div v-if="buildingType" class="personal-information__item">
                 <img src="../../assets/icons/building.svg"/>
-                <span>{{ buildingType }}</span>
+                <span data-testid="building-type">{{ buildingType }}</span>
             </div>
         </div>
     </CardWithTitle>   
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 import CardWithTitle from './CardWithTitle.vue';
 
 export default defineComponent({
