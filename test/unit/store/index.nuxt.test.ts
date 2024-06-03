@@ -5,10 +5,6 @@ import clients from '@/data/clients.json'
 import supplyPoints from '@/data/supplyPoints.json'
 import supplyPointsStoredMock from '@/test/mock-responses/supplyPointsStoredMock.json'
 
-vi.stubGlobal('$fetch', async () => ({
-    myData: clients
-}))
-
 describe('useMainStore should', () => {
     let store: any
     const cups: string = "123456"
