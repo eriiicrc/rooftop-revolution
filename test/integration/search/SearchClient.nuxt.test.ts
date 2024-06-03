@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { render, fireEvent, screen } from '@testing-library/vue'
 import SearchClient from '@/components/search/SearchClient.vue'
 
-describe('ClientSearch', () => {
-  it('should render correctly', () => {
+describe('ClientSearch should', () => {
+  it('render correctly', () => {
         render(SearchClient, {
             props: { error: false }
         })
@@ -14,7 +14,7 @@ describe('ClientSearch', () => {
         expect(screen.getByTestId('client-search-cta')).toBeInTheDocument()
   })
 
-  it('should emit searchClient event with CUPS value', async () => {
+  it('emit searchClient event with CUPS value', async () => {
     const { emitted } = render(SearchClient, {
         props: { error: false }
     })
@@ -29,7 +29,7 @@ describe('ClientSearch', () => {
     expect(emitted().searchClient[0]).toEqual(['123456'])
   })
 
-  it('should show error message when CUPS is not found', async () => {
+  it('show error message when CUPS is not found', async () => {
     render(SearchClient, {
         props: { error: true }
     })
@@ -41,7 +41,7 @@ describe('ClientSearch', () => {
     expect(screen.getByTestId('client-search-not-found-error')).toBeInTheDocument()
   })
 
-  it('should show error message when CUPS is empty', async () => {
+  it('show error message when CUPS is empty', async () => {
     render(SearchClient, {
         props: { error: true }
     })
@@ -53,7 +53,7 @@ describe('ClientSearch', () => {
     expect(screen.getByTestId('client-search-required-error')).toBeInTheDocument()
   })
 
-  it('should emit cleanError event when input changes', async () => {
+  it('emit cleanError event when input changes', async () => {
     const { emitted } = render(SearchClient, {
         props: { error: true }
     })

@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/vue'
 import { describe, it, expect } from 'vitest'
 import PersonalInformation from '@/components/client/PersonalInformation.vue'
 
-describe('PersonalInformation', () => {
-    it('should render all personal information', () => {
+describe('PersonalInformation should', () => {
+    it('render all personal information', () => {
         const props = {
             title: 'Personal Information',
             address: '123 street',

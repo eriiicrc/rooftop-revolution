@@ -11,7 +11,7 @@ vi.mock('vue-router', () => ({
     })),
 }))
 
-describe('useClient', () => {
+describe('useClient should', () => {
     let store: any
     
     beforeEach(() => {
@@ -21,27 +21,27 @@ describe('useClient', () => {
         store.supplyPoints = supplyPoints
     })
 
-    it('should set error to true when a client cannot be found', () => {
+    it('set error to true when a client cannot be found', () => {
         const { error, useSearchClient } = useClient()
         useSearchClient('xxxxxxx')
         expect(error.value).toBe(true)
     })
 
-    it('should load client page with a client able to get enrolled with revolution rooftop', async () => {
+    it('load client page with a client able to get enrolled with revolution rooftop', async () => {
         const { useInitClientPage, isRevolutionRooftopAllowed, useSearchClient } = useClient()
         useSearchClient("111222")
         await useInitClientPage()
         expect(isRevolutionRooftopAllowed.value).toEqual(true)
     })
 
-    it('should load client page with a client not able to get enrolled with revolution rooftop', async () => {
+    it('load client page with a client not able to get enrolled with revolution rooftop', async () => {
         const { useInitClientPage, isRevolutionRooftopAllowed, useSearchClient } = useClient()
         useSearchClient("345678")
         await useInitClientPage()
         expect(isRevolutionRooftopAllowed.value).toEqual(false)
     })
 
-    it('should set discount to Special Discount 12%', async () => {
+    it('set discount to Special Discount 12%', async () => {
         const discountMock = {
             discount: "12% discount",
             type: "Special discount",
@@ -52,7 +52,7 @@ describe('useClient', () => {
         expect(discount.value).toEqual(discountMock)
     })
 
-    it('should set discount to Standard Discount', async () => {
+    it('set discount to Standard Discount', async () => {
         const discountMock = {
             discount: "No Discount",
             type: "Standard discount",

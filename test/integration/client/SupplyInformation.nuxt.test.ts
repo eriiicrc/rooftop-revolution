@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/vue'
 import { describe, it, expect } from 'vitest'
 import SupplyInformation from '@/components/client/SupplyInformation.vue'
 
-describe('SupplyInformation', () => {
-    it('should render all supply info of the client', () => {
+describe('SupplyInformation should', () => {
+    it('render all supply info of the client', () => {
         const props = {
             tariff: 'tariff',
             invoicedAmount: 10,
