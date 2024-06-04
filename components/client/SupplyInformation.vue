@@ -3,23 +3,23 @@
         <div class="supply-information">
             <div v-if="tariff" class="supply-information__item">
                 <span class="supply-information__item__title">Tariff:</span>
-                <span data-testid="tariff">{{ tariff }}</span>
+                <span class="supply-information__item__value" data-testid="tariff">{{ tariff }}</span>
             </div>
             <div v-if="invoicedAmount" class="supply-information__item">
                 <span class="supply-information__item__title">Invoiced amount:</span>
-                <span data-testid="invoiced-amount">{{ invoicedAmount }}€</span>      
+                <span class="supply-information__item__value" data-testid="invoiced-amount">{{ invoicedAmount }}€</span>      
             </div>
             <div v-if="p1" class="supply-information__item">
                 <span class="supply-information__item__title">Power 1:</span>
-                <span data-testid="p1">{{ p1 }}W</span>
+                <span class="supply-information__item__value" data-testid="p1">{{ p1 }}W</span>
             </div>
             <div v-if="p2" class="supply-information__item">
                 <span class="supply-information__item__title">Power 2:</span>
-                <span data-testid="p2">{{ p2 }}W</span>
+                <span class="supply-information__item__value" data-testid="p2">{{ p2 }}W</span>
             </div>
             <div v-for="(neighbor, index) in neighbors" class="supply-information__item" :key="index" data-testid="neighbors">
                 <span class="supply-information__item__title">Neighbor {{ index + 1 }}:</span>
-                <span>{{ neighbor }}</span>
+                <span class="supply-information__item__value">{{ neighbor }}</span>
             </div>
         </div>
     </CardWithTitle>   
@@ -89,6 +89,10 @@ export default defineComponent({
         &__title {
             display: flex;
             font-weight: 100;
+        }
+
+        &__value {
+            font-weight: bold;
         }
     }  
 }
